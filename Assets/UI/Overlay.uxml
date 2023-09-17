@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement style="flex-grow: 1;">
+        <ui:VisualElement name="VisualElement" style="flex-grow: 1; align-items: auto;" />
+        <ui:VisualElement name="VisualElement" style="flex-grow: 1; justify-content: flex-start; flex-direction: column-reverse; align-self: auto; flex-wrap: nowrap; align-items: auto;">
+            <ui:ProgressBar value="100" title="Charge" name="ReloadBar" style="align-items: flex-end; justify-content: flex-start; flex-direction: column; align-self: auto; margin-top: 4px; margin-right: 4px; margin-bottom: 4px; margin-left: 4px; flex-basis: auto; width: auto; max-width: none;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
