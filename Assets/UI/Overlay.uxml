@@ -1,8 +1,11 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement style="flex-grow: 1;">
-        <ui:VisualElement name="VisualElement" style="flex-grow: 1; align-items: auto;" />
-        <ui:VisualElement name="VisualElement" style="flex-grow: 1; justify-content: flex-start; flex-direction: column-reverse; align-self: auto; flex-wrap: nowrap; align-items: auto;">
-            <ui:ProgressBar value="100" title="Charge" name="ReloadBar" style="align-items: flex-end; justify-content: flex-start; flex-direction: column; align-self: auto; margin-top: 4px; margin-right: 4px; margin-bottom: 4px; margin-left: 4px; flex-basis: auto; width: auto; max-width: none;" />
+    <ui:VisualElement style="flex-grow: 1; flex-direction: column; justify-content: flex-start; align-items: auto; width: auto; height: auto;">
+        <ui:VisualElement name="VisualElement" style="flex-grow: 1; align-items: center; min-width: auto; min-height: auto; width: 100%; height: 50%; -unity-slice-top: 0; padding-top: 2.5%;">
+            <ui:ProgressBar value="100" title="Health" name="HealthBar" style="width: 50%; height: auto; max-height: none; font-size: 14px; -unity-background-image-tint-color: rgb(255, 255, 255); opacity: 0.9; display: flex; -unity-slice-top: 0; -unity-slice-bottom: 0; align-self: auto; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; flex-grow: 0; flex-basis: auto; align-items: stretch; justify-content: space-around; min-height: auto; -unity-text-align: upper-center; white-space: normal; -unity-text-outline-width: 0; border-left-color: rgba(0, 0, 0, 0); border-right-color: rgba(0, 0, 0, 0); border-top-color: rgba(0, 0, 0, 0); border-bottom-color: rgba(0, 0, 0, 0); transform-origin: center; scale: 1 1;" />
+            <ui:ProgressBar value="100" title="Shields" name="ShieldBar" style="align-self: center; width: 50%; align-items: stretch; justify-content: center;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="VisualElement" style="flex-grow: 1; justify-content: flex-start; flex-direction: column; align-self: stretch; flex-wrap: nowrap; align-items: stretch; min-width: auto; min-height: auto;">
+            <ui:ProgressBar value="100" title="Charge" name="ReloadBar" style="align-items: stretch; justify-content: flex-start; flex-direction: column; align-self: center; margin-top: 4px; margin-right: 4px; margin-bottom: 4px; margin-left: 4px; flex-basis: auto; width: 25%; max-width: none; -unity-text-align: upper-left;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
