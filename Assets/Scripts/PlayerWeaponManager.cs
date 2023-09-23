@@ -7,10 +7,14 @@ public class PlayerWeaponManager : MonoBehaviour
 {
     [SerializeField] WeaponScript _weapon;
     [SerializeField] bool _fireIsPressed = false;
+    [SerializeField] Rigidbody _rigidbody;
 
+    private void Awake() {
+        _rigidbody = GetComponent<Rigidbody>();
+    }
     private void OnFire(InputValue inputValue)
     {
-        _weapon.FireCommand(transform.forward);
+        _weapon.FireCommand(transform.forward, _rigidbody.velocity.magnitude);
         _fireIsPressed = inputValue.isPressed;
     }
     public float GetChargeP()

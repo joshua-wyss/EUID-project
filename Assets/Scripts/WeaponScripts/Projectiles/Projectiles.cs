@@ -12,6 +12,10 @@ public abstract class Projectiles : MonoBehaviour
         _targetLocation = t;
         transform.LookAt(_targetLocation);
     }
+    public virtual void SpeedIncrease(float increase)
+    {
+        _Speed += increase;
+    }
     public float GetSpeed => _Speed;
     public virtual bool isSmartAmo => false;
 }

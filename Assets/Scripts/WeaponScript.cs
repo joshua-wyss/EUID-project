@@ -8,12 +8,12 @@ public abstract class WeaponScript : MonoBehaviour
     [SerializeField] protected float _reload = 5f;
     [SerializeField] protected Projectiles _projectilePrefab;
     [SerializeField] protected float _lastShotTime =  0;
-    protected abstract void FireWeapon(Vector3 v3);  
-    public void FireCommand(Vector3 targetPos)
+    protected abstract void FireWeapon(Vector3 v3, float s);  
+    public void FireCommand(Vector3 targetPos, float SpeedIncrease)
     {
         if(isReloded())
         {
-            FireWeapon(targetPos);
+            FireWeapon(targetPos, SpeedIncrease);
         }
     }
     public virtual float TimeOnTarget()
