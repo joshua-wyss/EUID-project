@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class Projectiles : MonoBehaviour
 {
     [SerializeField] protected float _Speed;
-    [SerializeField] Vector3 _targetLocation;
+    [SerializeField] protected Vector3 _targetLocation;
 
     public virtual void SetTargetLocation(Vector3 t)
     {   
@@ -13,4 +13,5 @@ public abstract class Projectiles : MonoBehaviour
         transform.LookAt(_targetLocation);
     }
     public float GetSpeed => _Speed;
+    public virtual bool isSmartAmo => false;
 }

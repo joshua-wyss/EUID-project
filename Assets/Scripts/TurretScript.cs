@@ -18,11 +18,12 @@ public class TurretScript : MonoBehaviour
     }
     private void CheckIfPointingAtTarget()
     {
-        Vector3 v3ToTarget = targetPos - _BarrelGO.transform.position;
+        Vector3 tPos = targetPos;
+        Vector3 v3ToTarget = tPos - _BarrelGO.transform.position;
         Vector3 v3actual = _BarrelGO.transform.forward;
         if(Vector3.Angle(v3ToTarget, v3actual) < _aimMinAngle)
         {
-            _weaponScript.FireCommand();
+            _weaponScript.FireCommand(tPos);
         }
     }
     private void TrackTarget()

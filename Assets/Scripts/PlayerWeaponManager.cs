@@ -10,7 +10,7 @@ public class PlayerWeaponManager : MonoBehaviour
 
     private void OnFire(InputValue inputValue)
     {
-        _weapon.FireCommand();
+        _weapon.FireCommand(transform.forward);
         _fireIsPressed = inputValue.isPressed;
     }
     public float GetChargeP()

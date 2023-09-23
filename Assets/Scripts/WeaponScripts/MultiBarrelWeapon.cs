@@ -9,20 +9,20 @@ public class MultiBarrelWeapon : WeaponScript
     [SerializeField] bool _linked;
     [SerializeField] int index = 0;
 
-    protected override void FireWeapon()
+    protected override void FireWeapon(Vector3 targetPos)
     {
         if(_linked)
         {
             foreach (var nozzle in _nozzles)
             {
                 Debug.DrawRay(nozzle.position, nozzle.forward * 100, Color.red, .5f);
-                FireShot(nozzle);
+                FireShot(targetPos, nozzle);
             }
         }
         else
         {
             Debug.DrawRay(_nozzles[index].position, _nozzles[index].forward * 100, Color.red, .5f);
-            FireShot(_nozzles[index]);
+            FireShot(targetPos, _nozzles[index]);
             indexIncrement();
         }
         _lastShotTime = Time.time;
@@ -31,10 +31,10 @@ public class MultiBarrelWeapon : WeaponScript
     {
         index = (index + 1) % _nozzles.Count;
     }
-    private void FireShot(Transform nozzle)
+    private void FireShot(Vector3 targetPos, Transform nozzle)
     {
         Projectiles shot = Instantiate(_projectilePrefab, nozzle.position, Quaternion.identity);
-        shot.SetTargetLocation(nozzle.transform.position + nozzle.forward * 100);
-
+        //shot.SetTargetLocation(nozzle.transform.position + nozzle.forward * 100);
+        SetShotTargetLoc(targetPos, shot, nozzle);
     }
 }
