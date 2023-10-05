@@ -24,6 +24,7 @@ public class OverLayM : MonoBehaviour
 
         _playerHealthManager.OnChangeHealth += OnRecieveHealthChange;
         _playerHealthManager.OnChangeShield += OnRecieveShieldChange;
+        pWep.OnChangeCharge += OnRecieveChargeChange;
 
         _healthBar.value = _playerHealthManager.HealthPercent;
         _shieldBar.value = _playerHealthManager.ShieldPercent;

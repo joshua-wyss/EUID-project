@@ -27,8 +27,8 @@ public class ProgrammedShell : Projectiles
     }
     private void normalStep()
     {
-        transform.position = Vector3.MoveTowards(transform.position, _targetLocation, _Speed*Time.deltaTime);
-        if(_targetLocation == transform.position)
+        transform.position = Vector3.MoveTowards(transform.position, _targetLocation.V3, _Speed*Time.deltaTime);
+        if(_targetLocation.V3 == transform.position)
         {
             bang();
         }
