@@ -35,6 +35,7 @@ public class PlayerHealthManager : MonoBehaviour, IDamageAble
             rechargeShield();
     }
     public event EventHandler<float> OnChangeShield;
+    public event EventHandler<bool> OnShieldBreakFull; //send true for shields broken, false for shields reactivated
     public event EventHandler<float> OnChangeHealth;
     private void DamageShield(int i)
     {
@@ -44,6 +45,7 @@ public class PlayerHealthManager : MonoBehaviour, IDamageAble
         {
             _ShieldHP = 0; 
             _shieldActive = false;
+            OnShieldBreakFull?.Invoke(this, true);
         }
         OnChangeShield?.Invoke(this, ShieldPercent);
     }
@@ -53,7 +55,8 @@ public class PlayerHealthManager : MonoBehaviour, IDamageAble
         if(_ShieldHP >= _maxShieldHP)
         {
             _ShieldHP = _maxShieldHP;
-            _shieldActive = true;            
+            OnShieldBreakFull?.Invoke(this, false);
+            _shieldActive = true;
         }
         OnChangeShield?.Invoke(this, ShieldPercent);
     }

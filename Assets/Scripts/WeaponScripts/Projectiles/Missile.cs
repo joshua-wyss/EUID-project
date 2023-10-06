@@ -15,10 +15,18 @@ public class Missile : Projectiles
         {
             bang();    
         }
+        /*
+        else if(EndPoint != Vector3.positiveInfinity)
+        {
+            bangAtEndPoint();
+        }*/
         else
         {
             normalStep();
         }
+    }
+    private void OnCollisionEnter(Collision other) {
+        bang();
     }
     private void bang()
     {

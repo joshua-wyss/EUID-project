@@ -11,10 +11,14 @@ public class TurretScript : MonoBehaviour
     [SerializeField] bool _balistics;
     [SerializeField] float leadS; //in frames
     [SerializeField] float _aimMinAngle = 10;
+    [SerializeField] float range = 100;
     private void FixedUpdate() {
         //_BarrelGO.transform.LookAt(targetPos);
-        TrackTarget();
-        CheckIfPointingAtTarget();
+        if(Vector3.Distance(transform.position, _target.position) <= range)
+        {
+            TrackTarget();
+            CheckIfPointingAtTarget();
+        }
     }
     private void CheckIfPointingAtTarget()
     {
