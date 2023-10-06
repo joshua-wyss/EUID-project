@@ -12,11 +12,16 @@ public class ExplosionScript : MonoBehaviour
     [SerializeField] int _damage = 1;
     [SerializeField] GameObject LaserGo;
     private void OnDrawGizmos() {
-        Gizmos.color = Color.red;
-        Gizmos.DrawSphere(transform.position, _radius);
+        //Gizmos.color = Color.red;
+        //Gizmos.DrawSphere(transform.position, _radius);
     }
     private void FixedUpdate() {
-        if((float)_stopwatch.Elapsed.Milliseconds / 1000 > _lifetime)
+        /*if((float)_stopwatch.Elapsed.Milliseconds / 1000 > _lifetime)
+        {
+            Destroy(LaserGo);
+        }*/
+        _lifetime -= Time.deltaTime;
+        if(_lifetime < 0)
         {
             Destroy(LaserGo);
         }

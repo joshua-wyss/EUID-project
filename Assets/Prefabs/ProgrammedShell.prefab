@@ -266,7 +266,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Speed: 40
-  _targetLocation: {x: 0, y: 0, z: 0}
+  _targetLocation:
+    _targetV3: {x: 0, y: 0, z: 0}
+    _targetT: {fileID: 0}
+    _isV3: 0
   _direction: {x: 0, y: 0, z: 0}
   _explosionScript: {fileID: 8640724761734808055}
   _BulletObject: {fileID: 4854743910754141553}
@@ -324,7 +327,7 @@ PrefabInstance:
       objectReference: {fileID: 7441631213419269620}
     - target: {fileID: 5423055229871226212, guid: 1fc11f84181277f469dc9fba79b14e73, type: 3}
       propertyPath: _lifetime
-      value: 0.1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7911578870083908510, guid: 1fc11f84181277f469dc9fba79b14e73, type: 3}
       propertyPath: m_Materials.Array.data[0]

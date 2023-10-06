@@ -7,7 +7,6 @@ public class Missile : Projectiles
     [SerializeField] float _fuelTime;  
     [SerializeField] ExplosionScript _explosionScript;
     [SerializeField] GameObject _missileObject;
-    [SerializeField] float _turnRate = 2f;
 
 
     private void FixedUpdate() {
