@@ -22,7 +22,7 @@ public class ShieldAnimationHandler : MonoBehaviour
     }
     private void OnShieldChangeRecieved(object sender, float percentage)
     {
-        Debug.Log(percentage);
+        //Debug.Log(percentage);
         if(_ShieldsActive)
             ShieldIsHit(percentage/100);
     }
@@ -42,7 +42,7 @@ public class ShieldAnimationHandler : MonoBehaviour
     {
         _Timer = ShieldFLickerTime;
         Vector3 shieldColorV3 = Vector3.Lerp(ShieldRed, ShieldBlue, p);
-        Debug.Log(shieldColorV3);
+        //Debug.Log(shieldColorV3);
         Color shieldColor = new Color(shieldColorV3.x/255, shieldColorV3.y/255, shieldColorV3.z/255);
         _shieldMat.SetColor("_EmissionColor", shieldColor);
         ShieldObject.GetComponent<Renderer>().material = _shieldMat;

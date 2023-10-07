@@ -8,14 +8,21 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] Transform _player;
     [SerializeField] float _fireRange = 100;
     [SerializeField] float _fireAngle = 10;
-    [SerializeField] float _Speed = 8;
+    [SerializeField] float _maxSpeed = 20;
+    [SerializeField] float _minSpeed = 4;
+    [SerializeField] float _accleration = 1;
+
+    [Header("Debuging")]
+    [SerializeField] float _actualSpeed = 4;
     [SerializeField] List<Vector3> _MovePoints = new List<Vector3>();
 
     private void Awake() {
         SelectNewManuver();
     }
     private void FixedUpdate() {
-        MoveStep(_Speed);
+        CheckFire();
+        CheckAcceleration();
+        MoveStep(_actualSpeed);
     }
 
     private void MoveStep(float v)
@@ -36,7 +43,7 @@ public class EnemyAI : MonoBehaviour
     }
     private void CheckFire()
     {
-        if(Vector3.Distance(_player.position, transform.position) < _fireRange && Vector3.Dot((_player.position - this.transform.position), transform.forward) < _fireAngle)
+        if(Vector3.Distance(_player.position, transform.position) < _fireRange && Vector3.Angle((_player.position - this.transform.position), transform.forward) < _fireAngle)
         {
             Fire();
         }
@@ -56,7 +63,15 @@ public class EnemyAI : MonoBehaviour
     public void SelectNewManuver()
     {
         //TODO
-        SetMovePoints(Test());
+        if(Vector3.Distance(transform.position, _player.transform.position) < 5 || Vector3.Angle(transform.forward, _player.transform.position  - transform.position) > 90f)
+        {
+            Debug.Log("Uturn");
+            SetMovePoints(UTurn());
+        }
+        else
+        {
+            SetMovePoints(Test());
+        }
         for(int i = 0; i < _MovePoints.Count -1; i++)
         {
             Debug.DrawRay(_MovePoints[i], _MovePoints[i] - _MovePoints[i+1], Color.gray, 1f);
@@ -67,7 +82,7 @@ public class EnemyAI : MonoBehaviour
         _MovePoints = movePoints;
     }
     private List<Vector3> Test(){
-        return CurveTowards2(_player.position, 8);
+        return CurveTowards2(_player.position, 20);
     }
     private List<Vector3> CurveTowards(Vector3 endPoint)
     {
@@ -85,7 +100,7 @@ public class EnemyAI : MonoBehaviour
             Vector3 x = i * r;
             float y = Mathf.Sin(i/7f * 180 * (Mathf.PI/180));
             Debug.Log("x: " + x + " y: " + y + " y * R: " + y * R * (r.magnitude * 7 /2));
-            Vector3 v3 = startPoint + x + R * y * (r.magnitude * 7 /2);
+            Vector3 v3 = startPoint + x + R * y * (r.magnitude * 7/2);
             result.Add(v3);
         }
         return result;
@@ -97,23 +112,51 @@ public class EnemyAI : MonoBehaviour
         Vector3 startP = transform.position;
         Vector3 d = endPoint - startP;
         
-        Vector3 R = (d).normalized -  transform.forward;
+        //Vector3 R = (d).normalized -  transform.forward;
+        Vector3 R = transform.forward * Mathf.Sin(Vector3.Angle(transform.forward, d) * Mathf.PI/180);
+        Debug.Log(R + " ANGLE " + Vector3.Angle(R, d));
         Debug.DrawRay(startP, d, Color.yellow, 1);
         Debug.DrawRay(startP + d/2, R, Color.red, 1);
 
         for(int i = 1; i <= segments; i++)
         {
-            float y = Mathf.Sin(i/segments * 180 * (Mathf.PI/180));
+            float y = Mathf.Sin((float)i/segments * 180 * (Mathf.PI/180));
+            //Debug.Log(y);
             result.Add(startP + (d*i/segments) + (R * y * d.magnitude/2));
         }
         
         return result;
+    }
+    private List<Vector3> UTurn()
+    {
+        float d = (_actualSpeed + _minSpeed)/2;
+        return CurveTowards2(transform.position + (transform.right * d), 10);
     }
     private void OnDrawGizmos() {
         Gizmos.color = Color.green;
         foreach (Vector3 item in _MovePoints)
         {
             Gizmos.DrawSphere(item, .2f);
+        }
+    }
+    private void CheckAcceleration()
+    {
+        if(_MovePoints.Count >= 2)
+        {
+            if(Vector3.Angle(transform.forward, _MovePoints[^1]) < 30)
+            {
+                _actualSpeed += _accleration * Time.deltaTime;
+                Debug.Log("accelerating");
+                if(_actualSpeed > _maxSpeed)
+                    _actualSpeed = _maxSpeed;
+            }
+            else if(Vector3.Angle(transform.forward, _MovePoints[^1]) > 60)
+            {
+                _actualSpeed -= _accleration * Time.deltaTime;
+                Debug.Log("deccelerate");
+                if(_actualSpeed < _minSpeed)
+                    _actualSpeed = _minSpeed;
+            }
         }
     }
 }

@@ -21,7 +21,7 @@ public class ProgrammedShell : Projectiles
     private void OnTriggerEnter(Collider other) {
         if(other.tag == "player")
         {
-            UnityEngine.Debug.Log("playerColliderHit by ProgrammedShell");
+            //UnityEngine.Debug.Log("playerColliderHit by ProgrammedShell");
             bang();
         }
     }
@@ -35,7 +35,7 @@ public class ProgrammedShell : Projectiles
         RaycastHit hit;
         if(Physics.Raycast(transform.position, _direction , out hit, _Speed * Time.fixedDeltaTime))
         {
-            UnityEngine.Debug.Log("ProgrammedShell will hit collider next frame!");
+            //UnityEngine.Debug.Log("ProgrammedShell will hit collider next frame!");
             _endPoint = hit.point;
         }
     }

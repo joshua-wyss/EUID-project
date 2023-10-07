@@ -33,7 +33,7 @@ public class DumbLaser : Projectiles
     private void OnTriggerEnter(Collider other) {
         if(other.tag == "player")
         {
-            UnityEngine.Debug.Log("playerColliderHit");
+            //UnityEngine.Debug.Log("playerColliderHit");
             bang();
         }
     }
@@ -47,7 +47,7 @@ public class DumbLaser : Projectiles
         RaycastHit hit;
         if(Physics.Raycast(transform.position, _direction , out hit, _Speed * Time.fixedDeltaTime))
         {
-            UnityEngine.Debug.Log("DumbLaser will hit collider next frame!");
+            //UnityEngine.Debug.Log("DumbLaser will hit collider next frame!");
             _endPoint = hit.point;
         }
     }
