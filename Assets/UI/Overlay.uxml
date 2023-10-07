@@ -8,6 +8,4 @@
             <ui:ProgressBar value="100" title="Charge" name="ReloadBar" style="align-items: stretch; justify-content: flex-start; flex-direction: column; align-self: center; margin-top: 4px; margin-right: 4px; margin-bottom: 4px; margin-left: 4px; flex-basis: auto; width: 25%; max-width: none; -unity-text-align: upper-left;" />
         </ui:VisualElement>
     </ui:VisualElement>
-    <ui:Label tabindex="-1" text="X" parse-escape-sequences="true" display-tooltip-when-elided="true" name="WIPCenter" style="position: absolute; left: 50%; top: 50%; right: 50%; bottom: 50%; -unity-text-align: middle-center;" />
-    <ui:Label tabindex="-1" text="X" parse-escape-sequences="true" display-tooltip-when-elided="true" name="WIPPointer" style="position: absolute; left: 50%; top: 50%; right: 50%; bottom: 50%; -unity-text-align: middle-center;" />
 </ui:UXML>

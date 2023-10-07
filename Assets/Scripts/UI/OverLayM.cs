@@ -16,6 +16,11 @@ public class OverLayM : MonoBehaviour
     private ProgressBar _healthBar;
     private ProgressBar _shieldBar;
     private UIDocument _overlayUIDoc;
+    private void Awake() {
+        GameObject playerGo = R_Singleton.Instance.GetPlayerGO();
+        pWep = playerGo.GetComponent<PlayerWeaponManager>();
+        _playerHealthManager = playerGo.GetComponent<PlayerHealthManager>();
+    }
     private void OnEnable() {
         _overlayUIDoc = GetComponent<UIDocument>();
         _charegeBar = _overlayUIDoc.rootVisualElement.Q<ProgressBar>(ChargeBarName);

@@ -5,9 +5,12 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
+    [Header("Offensive: ")]
     [SerializeField] Transform _player;
+    [SerializeField] WeaponScript _wScript;
     [SerializeField] float _fireRange = 100;
     [SerializeField] float _fireAngle = 10;
+    [Header("Movement: ")]
     [SerializeField] float _maxSpeed = 20;
     [SerializeField] float _minSpeed = 4;
     [SerializeField] float _accleration = 1;
@@ -51,6 +54,7 @@ public class EnemyAI : MonoBehaviour
     private void Fire()
     {
         Debug.Log("Enemy firing at player");
+        _wScript.FireCommand(transform.forward, _actualSpeed);
     }
     private void popMovePoint()
     {
@@ -114,7 +118,7 @@ public class EnemyAI : MonoBehaviour
         
         //Vector3 R = (d).normalized -  transform.forward;
         Vector3 R = transform.forward * Mathf.Sin(Vector3.Angle(transform.forward, d) * Mathf.PI/180);
-        Debug.Log(R + " ANGLE " + Vector3.Angle(R, d));
+        //Debug.Log(R + " ANGLE " + Vector3.Angle(R, d));
         Debug.DrawRay(startP, d, Color.yellow, 1);
         Debug.DrawRay(startP + d/2, R, Color.red, 1);
 
@@ -146,14 +150,14 @@ public class EnemyAI : MonoBehaviour
             if(Vector3.Angle(transform.forward, _MovePoints[^1]) < 30)
             {
                 _actualSpeed += _accleration * Time.deltaTime;
-                Debug.Log("accelerating");
+                //Debug.Log("accelerating");
                 if(_actualSpeed > _maxSpeed)
                     _actualSpeed = _maxSpeed;
             }
             else if(Vector3.Angle(transform.forward, _MovePoints[^1]) > 60)
             {
                 _actualSpeed -= _accleration * Time.deltaTime;
-                Debug.Log("deccelerate");
+                //Debug.Log("deccelerate");
                 if(_actualSpeed < _minSpeed)
                     _actualSpeed = _minSpeed;
             }

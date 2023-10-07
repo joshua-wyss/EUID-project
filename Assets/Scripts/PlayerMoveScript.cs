@@ -58,5 +58,8 @@ public class PlayerMoveScript : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
     }
-
+    public void OnExit(InputValue inputValue)
+    {
+        R_Singleton.Instance.GetUIManager().ActivePauseMenu();
+    }
 }
