@@ -8,6 +8,8 @@ using UnityEngine.InputSystem;
 public class PlayerWeaponManager : MonoBehaviour
 {
     [SerializeField] WeaponScript _weapon;
+    [SerializeField] List<WeaponScript> _avaialbleWeapons = new List<WeaponScript>(); 
+    [SerializeField] int _weaponIndex = 0;
     [SerializeField] bool _fireIsPressed = false;
     [SerializeField] Rigidbody _rigidbody;
     [SerializeField] Transform _lockedTransform;
@@ -16,6 +18,7 @@ public class PlayerWeaponManager : MonoBehaviour
 
     private void Awake() {
         _rigidbody = GetComponent<Rigidbody>();
+        _weapon = _avaialbleWeapons[0];
     }
     private void OnFire(InputValue inputValue)
     {
@@ -41,32 +44,13 @@ public class PlayerWeaponManager : MonoBehaviour
     public void OnSeekLock()
     {
         SeekingLock();
-        /*
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, _lookOnRadius);
-        List<GameObject> targetList = new List<GameObject>();
-        foreach (Collider c in hitColliders)
-        {
-            Vector3 dir = transform.position - c.gameObject.transform.position;
-            IDamageAble damageAble = c.GetComponent<IDamageAble>();
-            if(damageAble != null && Vector3.Angle(dir, transform.forward) <= _lookOnRadius)
-            {
-                targetList.Add(c.gameObject);
-            }
-        }
-        if(targetList.Count > 0)
-        {
-            GameObject closest = targetList[0];
-            float smallestAngle = Vector3.Angle(transform.position - closest.gameObject.transform.position, transform.forward);
-            foreach (var item in targetList)
-            {
-                float x = Vector3.Angle(transform.position - item.gameObject.transform.position, transform.forward);
-                if(x < smallestAngle)
-                {
-                    smallestAngle = x;
-                    closest = item;
-                }
-            }
-        }*/
+    }
+    public void OnSwapWeapon()
+    {
+        _weaponIndex++;
+        if(_weaponIndex >= _avaialbleWeapons.Count)
+            _weaponIndex = 0;
+        _weapon = _avaialbleWeapons[_weaponIndex];
     }
     private void SeekingLock()
     {
