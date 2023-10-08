@@ -773,7 +773,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ignoreRadius: 100
   screenCenter: {x: 0, y: 0}
-  sensitivity: 1
+  sensitivity: 1.3
   rollForce: 400
   wasdDirection: {x: 0, y: 0}
   thrust: 15000
@@ -918,10 +918,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e26832078bad3e419d0a885cc2e2a6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _Health: 50
-  _maxHP: 50
-  _ShieldHP: 40
-  _maxShieldHP: 40
+  _Health: 30
+  _maxHP: 30
+  _ShieldHP: 20
+  _maxShieldHP: 20
   _shieldActive: 1
   _shieldRecharge: 2
   _rechargeDelay: 2

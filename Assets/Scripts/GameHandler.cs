@@ -38,15 +38,15 @@ public class GameHandler : MonoBehaviour
         _levelExit.gameObject.SetActive(false);
         player.GetComponent<PlayerMoveScript>().SetQuestPointer(_MCGinLevel[0].transform.position);
 
-        R_Singleton.Instance.GetUIManager().GetOverLay().ChangeDisplay(
-            "Collected McGuffins: " + aqquiredMCGs + "/" + globalMCGs
-        );
     }
     private void OnEnable() {
         foreach (var item in _MCGinLevel)
         {
             item.OnEnterPickUp += ReEnterPickUp;
         }
+        R_Singleton.Instance.GetUIManager().GetOverLay().ChangeDisplay(
+            "Collected McGuffins: " + aqquiredMCGs + "/" + globalMCGs
+        );
     }
     private void ReEnterPickUp(object sender, PickUpData pickUpData)
     {

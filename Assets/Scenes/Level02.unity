@@ -5126,6 +5126,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameHandler
       objectReference: {fileID: 0}
+    - target: {fileID: 4478679839609452728, guid: 95a8ad86891c5bd42b69469f21c0c5c2, type: 3}
+      propertyPath: _levelExit
+      value: 
+      objectReference: {fileID: 1576091602}
     - target: {fileID: 6506656858055017207, guid: 95a8ad86891c5bd42b69469f21c0c5c2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -5244,6 +5248,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 425b9fab8caaa0845a0d4fc70b5730e6, type: 3}
+--- !u!114 &1576091602 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8603903977856941499, guid: 425b9fab8caaa0845a0d4fc70b5730e6, type: 3}
+  m_PrefabInstance: {fileID: 1576091601}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d8154f6daab97a4d993ce41a1e6b6d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1627393842
 PrefabInstance:
   m_ObjectHideFlags: 0

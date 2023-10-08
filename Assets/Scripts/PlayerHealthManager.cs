@@ -26,7 +26,7 @@ public class PlayerHealthManager : MonoBehaviour, IDamageAble
             OnChangeHealth?.Invoke(this, HealthPercent);
             if(_Health <= 0)
             {
-                throw new System.NotImplementedException();
+                UnityEngine.SceneManagement.SceneManager.LoadScene(0);
             }
         }
     }
