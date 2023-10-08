@@ -18,6 +18,11 @@ public class GameHandler : MonoBehaviour
             }
         }
         _totalMCGs = _MCGinLevel.Count;
+        var tempTurrets = FindObjectsByType<TurretScript>(FindObjectsSortMode.None);
+        foreach (TurretScript t in tempTurrets)
+        {
+            t.SetTarget(R_Singleton.Instance.GetPlayerGO().transform);
+        }
     }
     private void OnEnable() {
         foreach (var item in _MCGinLevel)

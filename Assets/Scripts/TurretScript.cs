@@ -53,5 +53,10 @@ public class TurretScript : MonoBehaviour
     private void OnDrawGizmos() {
         Gizmos.color = Color.blue;
         Gizmos.DrawRay(_BarrelGO.transform.position, _BarrelGO.transform.forward * 300);
+        //Gizmos.DrawSphere(transform.position, range);
+    }
+    public void SetTarget(Transform trans)
+    {
+        _target = trans;
     }
 }

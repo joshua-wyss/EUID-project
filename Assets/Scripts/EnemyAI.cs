@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class EnemyAI : MonoBehaviour
+public class EnemyAI : MonoBehaviour, IDamageAble
 {
     [Header("Offensive: ")]
     [SerializeField] Transform _player;
@@ -11,13 +11,15 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] float _fireRange = 100;
     [SerializeField] float _fireAngle = 10;
     [Header("Movement: ")]
-    [SerializeField] float _maxSpeed = 20;
+    [SerializeField] float _maxSpeed = 50;
     [SerializeField] float _minSpeed = 4;
     [SerializeField] float _accleration = 1;
 
     [Header("Debuging")]
     [SerializeField] float _actualSpeed = 4;
     [SerializeField] List<Vector3> _MovePoints = new List<Vector3>();
+    [Header("HP")]
+    [SerializeField] int _Health = 8;
 
     private void Awake() {
         SelectNewManuver();
@@ -161,6 +163,15 @@ public class EnemyAI : MonoBehaviour
                 if(_actualSpeed < _minSpeed)
                     _actualSpeed = _minSpeed;
             }
+        }
+    }
+
+    public void TakeDamage(int i)
+    {
+        _Health -= i;
+        if(_Health <= 0)
+        {
+            Destroy(gameObject);
         }
     }
 }
