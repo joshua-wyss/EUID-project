@@ -16,6 +16,8 @@ public class PlayerWeaponManager : MonoBehaviour
     [SerializeField] float _lookOnRadius = 100;
     [SerializeField] float _lookOnAngle = 80;
 
+    [SerializeField] Canvas _canvasTargeting;
+
     private void Awake() {
         _rigidbody = GetComponent<Rigidbody>();
         _weapon = _avaialbleWeapons[0];
@@ -40,6 +42,15 @@ public class PlayerWeaponManager : MonoBehaviour
     }
     private void FixedUpdate() {
         OnChangeCharge?.Invoke(this, GetChargeP());
+        RaycastHit hit;
+        if(Physics.Raycast(transform.position + transform.forward *5, transform.forward, out hit, 50))
+        {
+            _canvasTargeting.transform.localPosition = new Vector3(0,0,Vector3.Distance(hit.point, transform.position)-1);
+        }
+        else
+        {
+            _canvasTargeting.transform.localPosition = new Vector3(0,0,50);
+        }
     }
     public void OnSeekLock()
     {
@@ -62,7 +73,7 @@ public class PlayerWeaponManager : MonoBehaviour
         {
             Vector3 dir = c.gameObject.transform.position - transform.position;
             IDamageAble damageAble = c.GetComponent<IDamageAble>();
-            if(damageAble != null && Vector3.Angle(dir, transform.forward) <= _lookOnRadius && c.gameObject.tag == "Hostile")
+            if(damageAble != null && Vector3.Angle(dir, transform.forward) <= _lookOnAngle && c.gameObject.tag == "Hostile")
             {
                 targetList.Add(c.gameObject);
             }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class GameHandler : MonoBehaviour
@@ -7,6 +8,8 @@ public class GameHandler : MonoBehaviour
     [SerializeField] List<PickUpMCG> _MCGinLevel = new List<PickUpMCG>();
     [SerializeField] int _aqquiredMCGs = 0;
     [SerializeField] int _totalMCGs = 0;
+    [SerializeField] LevelExit _levelExit;
+    [SerializeField] List<SpeedUpGate> _speedUpGates = new List<SpeedUpGate>();
 
     private void Awake() {
         var tempMCGs = FindObjectsByType<PickUpMCG>(FindObjectsSortMode.None);
@@ -19,10 +22,20 @@ public class GameHandler : MonoBehaviour
         }
         _totalMCGs = _MCGinLevel.Count;
         var tempTurrets = FindObjectsByType<TurretScript>(FindObjectsSortMode.None);
+        GameObject player = R_Singleton.Instance.GetPlayerGO();
         foreach (TurretScript t in tempTurrets)
         {
-            t.SetTarget(R_Singleton.Instance.GetPlayerGO().transform);
+            t.SetTarget(player.transform);
         }
+
+        var gates = FindObjectsByType<SpeedUpGate>(FindObjectsSortMode.None);
+        player.GetComponent<PlayerMoveScript>().ListenToTestGates(gates.ToList());
+
+        if(_levelExit == null)
+        {
+            _levelExit = FindAnyObjectByType<LevelExit>();
+        }
+        _levelExit.gameObject.SetActive(false);
     }
     private void OnEnable() {
         foreach (var item in _MCGinLevel)
@@ -39,6 +52,10 @@ public class GameHandler : MonoBehaviour
     private void pickedUPMCG()
     {
         _aqquiredMCGs++;
+        if(_aqquiredMCGs >= _totalMCGs)
+        {
+            _levelExit.gameObject.SetActive(true);
+        }
     }
     public int aqquiredMCGs => _aqquiredMCGs;
     public int globalMCGs => _totalMCGs;

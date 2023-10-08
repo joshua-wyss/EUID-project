@@ -18,14 +18,15 @@ public class PlayerMoveScript : MonoBehaviour
     [SerializeField] float Speed = 0;
     [SerializeField] Rigidbody rigi;
 
-    [SerializeField] SpeedUpGate testGate;
-
     private void Awake() {
         rigi = GetComponent<Rigidbody>();
         screenCenter = new Vector2 (Screen.width, Screen.height)/2;
     }
-    private void OnEnable() {
-        testGate.OnEnterdSpeedUp += OnEnterSpeedUp;
+    public void ListenToTestGates(List<SpeedUpGate> list) {
+        foreach (SpeedUpGate item in list)
+        {
+            item.OnEnterdSpeedUp += OnEnterSpeedUp;            
+        }
     }
     private void OnEnterSpeedUp(object sender, SpeedUpData SUD)
     {

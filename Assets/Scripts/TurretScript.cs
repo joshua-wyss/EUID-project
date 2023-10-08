@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,7 +26,13 @@ public class TurretScript : MonoBehaviour
         Vector3 tPos = targetPos;
         Vector3 v3ToTarget = tPos - _BarrelGO.transform.position;
         Vector3 v3actual = _BarrelGO.transform.forward;
-        if(Vector3.Angle(v3ToTarget, v3actual) < _aimMinAngle)
+        Boolean PathFree = true;
+        RaycastHit pathHit;
+        if(Physics.Raycast(transform.position, v3ToTarget, out pathHit, range))
+        {
+            PathFree = !(pathHit.collider.gameObject.tag == "player");
+        }
+        if(Vector3.Angle(v3ToTarget, v3actual) < _aimMinAngle && PathFree)
         {
             _weaponScript.FireCommand(new targetLoc(tPos), 0f);
         }

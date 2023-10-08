@@ -22,7 +22,12 @@ public class EnemyAI : MonoBehaviour, IDamageAble
     [SerializeField] int _Health = 8;
 
     private void Awake() {
+        if(_player == null)
+        {
+            _player = R_Singleton.Instance.GetPlayerGO().transform;
+        }
         SelectNewManuver();
+
     }
     private void FixedUpdate() {
         CheckFire();
