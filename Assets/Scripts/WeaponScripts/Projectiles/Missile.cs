@@ -7,10 +7,12 @@ public class Missile : Projectiles
     [SerializeField] float _fuelTime;  
     [SerializeField] ExplosionScript _explosionScript;
     [SerializeField] GameObject _missileObject;
+    [SerializeField] float _inactivePeriod = .5f;
 
 
     private void FixedUpdate() {
         _fuelTime -= Time.deltaTime;
+        _inactivePeriod -= Time.deltaTime;
         if(_fuelTime < 0)
         {
             bang();    
@@ -26,7 +28,8 @@ public class Missile : Projectiles
         }
     }
     private void OnCollisionEnter(Collision other) {
-        bang();
+        if(_inactivePeriod < 0)
+            bang();
     }
     private void bang()
     {
@@ -39,4 +42,5 @@ public class Missile : Projectiles
         transform.LookAt(_targetLocation.V3);
         transform.position = Vector3.MoveTowards(transform.position, _targetLocation.V3, _Speed * Time.deltaTime);
     }
+    public override bool isSmartAmo => true;
 }

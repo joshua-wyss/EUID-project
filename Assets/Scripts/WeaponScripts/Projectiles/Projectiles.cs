@@ -7,9 +7,10 @@ public abstract class Projectiles : MonoBehaviour
     [SerializeField] protected float _Speed;
     [SerializeField] protected targetLoc _targetLocation;
 
-    public virtual void SetTargetLocation(Vector3 t)
+    public virtual void SetTargetLocation(targetLoc t)
     {   
-        _targetLocation = new targetLoc(t);
+        //_targetLocation = new targetLoc(t);
+        _targetLocation = t;
         transform.LookAt(_targetLocation.V3);
     }
     public virtual void SpeedIncrease(float increase)

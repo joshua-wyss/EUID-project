@@ -50,9 +50,9 @@ public class ProgrammedShell : Projectiles
         transform.position = _endPoint;
         bang();
     }
-    public override void SetTargetLocation(Vector3 t)
+    public override void SetTargetLocation(targetLoc t)
     {
-        _direction = (t - transform.position).normalized;
+        _direction = (t.V3 - transform.position).normalized;
         base.SetTargetLocation(t);
     }
     public override bool isSmartAmo => true;

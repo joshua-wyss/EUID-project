@@ -8,8 +8,9 @@ public abstract class WeaponScript : MonoBehaviour
     [SerializeField] protected float _reload = 5f;
     [SerializeField] protected Projectiles _projectilePrefab;
     [SerializeField] protected float _lastShotTime =  0;
-    protected abstract void FireWeapon(Vector3 v3, float s);  
-    public void FireCommand(Vector3 targetPos, float SpeedIncrease)
+    [SerializeField] bool needsTransformLock = false;
+    protected abstract void FireWeapon(targetLoc tL, float s);  
+    public void FireCommand(targetLoc targetPos, float SpeedIncrease)
     {
         if(isReloded())
         {
@@ -28,7 +29,7 @@ public abstract class WeaponScript : MonoBehaviour
     {
         return 100 * (isReloded() ? 1 : (Time.time - _lastShotTime)/_reload);
     }
-    protected void SetShotTargetLoc(Vector3 tpos, Projectiles shot, Transform shotOrigin)
+    protected void SetShotTargetLoc(targetLoc tpos, Projectiles shot, Transform shotOrigin)
     {
         if(_projectilePrefab.isSmartAmo)
         {
@@ -36,8 +37,9 @@ public abstract class WeaponScript : MonoBehaviour
         }
         else
         {
-            shot.SetTargetLocation(shotOrigin.transform.position + shotOrigin.forward * 100);
+            shot.SetTargetLocation(new targetLoc(shotOrigin.transform.position + shotOrigin.forward * 100));
         }
     }
     public float getProjectileSpeed => _projectilePrefab.GetSpeed;
+    public bool getLockTReq => needsTransformLock;
 }

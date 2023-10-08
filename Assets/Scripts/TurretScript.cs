@@ -27,7 +27,7 @@ public class TurretScript : MonoBehaviour
         Vector3 v3actual = _BarrelGO.transform.forward;
         if(Vector3.Angle(v3ToTarget, v3actual) < _aimMinAngle)
         {
-            _weaponScript.FireCommand(tPos, 0f);
+            _weaponScript.FireCommand(new targetLoc(tPos), 0f);
         }
     }
     private void TrackTarget()

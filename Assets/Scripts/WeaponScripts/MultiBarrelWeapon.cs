@@ -9,7 +9,7 @@ public class MultiBarrelWeapon : WeaponScript
     [SerializeField] bool _linked;
     [SerializeField] int index = 0;
 
-    protected override void FireWeapon(Vector3 targetPos, float speedIncrease)
+    protected override void FireWeapon(targetLoc targetPos, float speedIncrease)
     {
         if(_linked)
         {
@@ -31,7 +31,7 @@ public class MultiBarrelWeapon : WeaponScript
     {
         index = (index + 1) % _nozzles.Count;
     }
-    private void FireShot(Vector3 targetPos, Transform nozzle, float speedIncrease)
+    private void FireShot(targetLoc targetPos, Transform nozzle, float speedIncrease)
     {
         Projectiles shot = Instantiate(_projectilePrefab, nozzle.position, Quaternion.identity);
         //shot.SetTargetLocation(nozzle.transform.position + nozzle.forward * 100);

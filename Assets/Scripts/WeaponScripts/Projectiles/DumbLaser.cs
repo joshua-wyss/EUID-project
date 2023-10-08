@@ -25,9 +25,9 @@ public class DumbLaser : Projectiles
     private void Awake() {
         _stopwatch.Start();
     }
-    public override void SetTargetLocation(Vector3 t)
+    public override void SetTargetLocation(targetLoc t)
     {
-        _direction = (t - transform.position).normalized;
+        _direction = (t.V3 - transform.position).normalized;
         base.SetTargetLocation(t);
     }
     private void OnTriggerEnter(Collider other) {

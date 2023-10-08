@@ -10,18 +10,18 @@ public class BurstFireWeapon : WeaponScript
     [SerializeField] int _burstSize;
     [SerializeField] float _cadence;
 
-    protected override void FireWeapon(Vector3 targetPos, float speedIncrease)
+    protected override void FireWeapon(targetLoc targetLoc, float speedIncrease)
     {
         if(_linked)
         {
             foreach (var nozzle in _nozzles)
             {
-                StartCoroutine(FireBurst(targetPos, nozzle, speedIncrease));
+                StartCoroutine(FireBurst(targetLoc, nozzle, speedIncrease));
             }
         }
         else
         {
-            StartCoroutine(FireBurst(targetPos, _nozzles[index], speedIncrease));
+            StartCoroutine(FireBurst(targetLoc, _nozzles[index], speedIncrease));
             indexIncrement();
         }
         _lastShotTime = Time.time;
@@ -30,7 +30,7 @@ public class BurstFireWeapon : WeaponScript
     {
         index = (index + 1) % _nozzles.Count;
     }
-    public IEnumerator FireBurst(Vector3 targetPos, Transform nozzle, float speedIncrease)
+    public IEnumerator FireBurst(targetLoc targetPos, Transform nozzle, float speedIncrease)
     {
         for(int i = 0; i < _burstSize; i++)
         {

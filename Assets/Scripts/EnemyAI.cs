@@ -54,7 +54,7 @@ public class EnemyAI : MonoBehaviour
     private void Fire()
     {
         Debug.Log("Enemy firing at player");
-        _wScript.FireCommand(transform.forward, _actualSpeed);
+        _wScript.FireCommand(new targetLoc(transform.forward), _actualSpeed);
     }
     private void popMovePoint()
     {
