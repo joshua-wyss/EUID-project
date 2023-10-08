@@ -34,6 +34,13 @@ public class targetLoc{
     {
         _isV3 = false;
         _targetT = transform;
+        _targetV3 = transform.position;
     }
-    public Vector3 V3 => _isV3 ? _targetV3 : _targetT.position;
+    public Vector3 GetTransformPos()
+    {
+        if(_targetT != null)
+            return _targetT.position;
+        return _targetV3;
+    }
+    public Vector3 V3 => _isV3 ? _targetV3 : GetTransformPos();
 }
