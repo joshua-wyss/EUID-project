@@ -35,4 +35,8 @@ public class InLevelUIManager : MonoBehaviour
         _pauseMenuLogic.gameObject.SetActive(false);
         Time.timeScale = _timeScale;
     }
+    public OverLayM GetOverLay()
+    {
+        return _overlayLogic;
+    }
 }

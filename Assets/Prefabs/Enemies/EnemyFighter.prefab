@@ -111,11 +111,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 0}
   _wScript: {fileID: 4056124467207331779}
+  EngageRange: 600
   _fireRange: 100
   _fireAngle: 10
-  _maxSpeed: 50
+  _maxSpeed: 35
   _minSpeed: 4
-  _accleration: 1
+  _accleration: 0.5
   _actualSpeed: 4
   _MovePoints: []
   _Health: 8

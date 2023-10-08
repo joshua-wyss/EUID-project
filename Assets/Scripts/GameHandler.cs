@@ -36,6 +36,11 @@ public class GameHandler : MonoBehaviour
             _levelExit = FindAnyObjectByType<LevelExit>();
         }
         _levelExit.gameObject.SetActive(false);
+        player.GetComponent<PlayerMoveScript>().SetQuestPointer(_MCGinLevel[0].transform.position);
+
+        R_Singleton.Instance.GetUIManager().GetOverLay().ChangeDisplay(
+            "Collected McGuffins: " + aqquiredMCGs + "/" + globalMCGs
+        );
     }
     private void OnEnable() {
         foreach (var item in _MCGinLevel)
@@ -52,10 +57,18 @@ public class GameHandler : MonoBehaviour
     private void pickedUPMCG()
     {
         _aqquiredMCGs++;
+        GameObject player = R_Singleton.Instance.GetPlayerGO();
         if(_aqquiredMCGs >= _totalMCGs)
         {
             _levelExit.gameObject.SetActive(true);
+            player.GetComponent<PlayerMoveScript>().SetQuestPointer(_levelExit.transform.position);
         }
+        else{
+            player.GetComponent<PlayerMoveScript>().SetQuestPointer(_MCGinLevel[0].transform.position);
+        }
+        R_Singleton.Instance.GetUIManager().GetOverLay().ChangeDisplay(
+            "Collected McGuffins: " + aqquiredMCGs + "/" + globalMCGs
+        );
     }
     public int aqquiredMCGs => _aqquiredMCGs;
     public int globalMCGs => _totalMCGs;

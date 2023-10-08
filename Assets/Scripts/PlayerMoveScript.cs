@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.PackageManager.UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -18,6 +17,9 @@ public class PlayerMoveScript : MonoBehaviour
     [SerializeField] float Speed = 0;
     [SerializeField] Rigidbody rigi;
 
+    [SerializeField] Canvas _canvasQuestPointer;
+    [SerializeField] Vector3 _CurrentQuestO;
+
     private void Awake() {
         rigi = GetComponent<Rigidbody>();
         screenCenter = new Vector2 (Screen.width, Screen.height)/2;
@@ -27,6 +29,10 @@ public class PlayerMoveScript : MonoBehaviour
         {
             item.OnEnterdSpeedUp += OnEnterSpeedUp;            
         }
+    }
+    public void SetQuestPointer(Vector3 v3)
+    {
+        _CurrentQuestO = v3;
     }
     private void OnEnterSpeedUp(object sender, SpeedUpData SUD)
     {
@@ -42,6 +48,17 @@ public class PlayerMoveScript : MonoBehaviour
         rigi.AddRelativeTorque(pitch * sensitivity * Time.deltaTime, yaw * sensitivity * Time.deltaTime, Time.deltaTime * rollForce * -wasdDirection.x);
         rigi.AddRelativeForce(0f, 0f, thrust * thrustSetting * Time.deltaTime);
         Speed = rigi.velocity.magnitude;
+
+        RaycastHit hit;
+        Vector3 dir = _CurrentQuestO - transform.position;
+        if(Physics.Raycast(transform.position + dir.normalized * 5, dir, out hit, 80))
+        {
+            _canvasQuestPointer.transform.position = transform.position + (hit.point - transform.position) * .95f;
+        }
+        else
+        {
+            _canvasQuestPointer.transform.position = transform.position + dir.normalized * 90;
+        }
     }
     public void OnMove(InputValue inputValue)
     {

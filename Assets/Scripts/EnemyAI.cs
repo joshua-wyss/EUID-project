@@ -8,6 +8,7 @@ public class EnemyAI : MonoBehaviour, IDamageAble
     [Header("Offensive: ")]
     [SerializeField] Transform _player;
     [SerializeField] WeaponScript _wScript;
+    [SerializeField] float EngageRange = 600;
     [SerializeField] float _fireRange = 100;
     [SerializeField] float _fireAngle = 10;
     [Header("Movement: ")]
@@ -74,7 +75,11 @@ public class EnemyAI : MonoBehaviour, IDamageAble
     public void SelectNewManuver()
     {
         //TODO
-        if(Vector3.Distance(transform.position, _player.transform.position) < 5 || Vector3.Angle(transform.forward, _player.transform.position  - transform.position) > 90f)
+        if(Vector3.Distance(transform.position, _player.transform.position) > EngageRange)
+        {
+            SetMovePoints(UTurn());
+        }
+        else if(Vector3.Distance(transform.position, _player.transform.position) < 20 || Vector3.Angle(transform.forward, _player.transform.position  - transform.position) > 90f)
         {
             Debug.Log("Uturn");
             SetMovePoints(UTurn());
@@ -93,7 +98,7 @@ public class EnemyAI : MonoBehaviour, IDamageAble
         _MovePoints = movePoints;
     }
     private List<Vector3> Test(){
-        return CurveTowards2(_player.position, 20);
+        return CurveTowards2(_player.position + (_player.position - transform.position).normalized * 8 , 20);
     }
     private List<Vector3> CurveTowards(Vector3 endPoint)
     {

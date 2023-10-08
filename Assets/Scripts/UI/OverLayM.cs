@@ -9,12 +9,14 @@ public class OverLayM : MonoBehaviour
     private const string ChargeBarName = "ReloadBar";
     private const string HealthBarName = "HealthBar";
     private const string ShieldBarName = "ShieldBar";
+    private const string DisplayLabelName = "CollectionDisplay";
 
     [SerializeField] PlayerWeaponManager pWep;
     [SerializeField] PlayerHealthManager _playerHealthManager;
     private ProgressBar _charegeBar;
     private ProgressBar _healthBar;
     private ProgressBar _shieldBar;
+    private Label _displayLabel;
     private UIDocument _overlayUIDoc;
     private void Awake() {
         GameObject playerGo = R_Singleton.Instance.GetPlayerGO();
@@ -26,6 +28,8 @@ public class OverLayM : MonoBehaviour
         _charegeBar = _overlayUIDoc.rootVisualElement.Q<ProgressBar>(ChargeBarName);
         _healthBar = _overlayUIDoc.rootVisualElement.Q<ProgressBar>(HealthBarName);
         _shieldBar = _overlayUIDoc.rootVisualElement.Q<ProgressBar>(ShieldBarName);
+
+        _displayLabel = _overlayUIDoc.rootVisualElement.Q<Label>(DisplayLabelName);
 
         _playerHealthManager.OnChangeHealth += OnRecieveHealthChange;
         _playerHealthManager.OnChangeShield += OnRecieveShieldChange;
@@ -45,5 +49,9 @@ public class OverLayM : MonoBehaviour
     private void OnRecieveChargeChange(object sender, float pCharge)
     {//WIP once the player has a charge and it's not just the weapon.
         _charegeBar.value = pCharge;
+    }
+    public void ChangeDisplay(String s)
+    {
+        _displayLabel.text = s;
     }
 }
