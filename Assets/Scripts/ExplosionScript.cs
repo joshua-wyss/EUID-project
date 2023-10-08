@@ -11,6 +11,9 @@ public class ExplosionScript : MonoBehaviour
     [SerializeField] float _radius = 1f;
     [SerializeField] int _damage = 1;
     [SerializeField] GameObject LaserGo;
+    [SerializeField] AudioClip _explosionClip;
+    private AudioSource _expSoundSource;
+
     private void OnDrawGizmos() {
         //Gizmos.color = Color.red;
         //Gizmos.DrawSphere(transform.position, _radius);
@@ -35,5 +38,9 @@ public class ExplosionScript : MonoBehaviour
             if(damageAble != null)
             damageAble.TakeDamage(_damage);
         }
+        /*
+        _expSoundSource = GetComponent<AudioSource>();
+        _expSoundSource.clip = _explosionClip;
+        _expSoundSource.Play();*/
     }
 }   

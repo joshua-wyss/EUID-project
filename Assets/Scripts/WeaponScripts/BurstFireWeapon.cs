@@ -32,8 +32,10 @@ public class BurstFireWeapon : WeaponScript
     }
     public IEnumerator FireBurst(targetLoc targetPos, Transform nozzle, float speedIncrease)
     {
+        
         for(int i = 0; i < _burstSize; i++)
         {
+            PlaySound();
             Debug.DrawRay(nozzle.position, nozzle.forward * 100, Color.red, .25f);
             Projectiles shot = Instantiate(_projectilePrefab, nozzle.position, Quaternion.identity);
             //shot.SetTargetLocation(nozzle.transform.position + nozzle.forward * 100);

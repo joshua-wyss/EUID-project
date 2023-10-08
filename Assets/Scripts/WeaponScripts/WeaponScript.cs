@@ -9,7 +9,24 @@ public abstract class WeaponScript : MonoBehaviour
     [SerializeField] protected Projectiles _projectilePrefab;
     [SerializeField] protected float _lastShotTime =  0;
     [SerializeField] bool needsTransformLock = false;
+    [SerializeField] AudioClip _FireClip;
+    [SerializeField] float _playbackOffset = 0;
+    private AudioSource _FireSoundSource;
     protected abstract void FireWeapon(targetLoc tL, float s);  
+
+    private void OnEnable() {
+        _FireSoundSource = gameObject.AddComponent<AudioSource>();
+        _FireSoundSource.clip = _FireClip;
+        _FireSoundSource.Play();
+        _FireSoundSource.Pause();
+        _FireSoundSource.spatialBlend = 1;
+    }
+    protected void PlaySound()
+    {
+        _FireSoundSource.Stop();
+        _FireSoundSource.time = _playbackOffset;
+        _FireSoundSource.Play();
+    }
     public void FireCommand(targetLoc targetPos, float SpeedIncrease)
     {
         if(isReloded())

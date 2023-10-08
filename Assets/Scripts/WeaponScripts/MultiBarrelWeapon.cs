@@ -33,6 +33,7 @@ public class MultiBarrelWeapon : WeaponScript
     }
     private void FireShot(targetLoc targetPos, Transform nozzle, float speedIncrease)
     {
+        PlaySound();
         Projectiles shot = Instantiate(_projectilePrefab, nozzle.position, Quaternion.identity);
         //shot.SetTargetLocation(nozzle.transform.position + nozzle.forward * 100);
         SetShotTargetLoc(targetPos, shot, nozzle);

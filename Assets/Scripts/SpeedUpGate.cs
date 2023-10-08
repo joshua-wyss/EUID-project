@@ -17,7 +17,7 @@ public class SpeedUpGate : MonoBehaviour
     public event EventHandler<SpeedUpData> OnEnterdSpeedUp;
     protected virtual void EnterSpeedUp()
     {
-        Debug.Log("Sending SpeedUpEvent");
+        //Debug.Log("Sending SpeedUpEvent");
         OnEnterdSpeedUp?.Invoke(this, new SpeedUpData(ForceApplied, duration));
     }
 }

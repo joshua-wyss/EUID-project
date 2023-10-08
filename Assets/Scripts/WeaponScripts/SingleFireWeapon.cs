@@ -21,5 +21,6 @@ public class SingleFireWeapon : WeaponScript
         SetShotTargetLoc(targetPos, shot, _nozzle);
         shot.SpeedIncrease(speedIncrease);
         _lastShotTime = Time.time;  
+        PlaySound();
     }
 }
